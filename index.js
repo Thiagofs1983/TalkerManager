@@ -1,8 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const writeFile = require('./writeFile');
 const readFile = require('./readFile');
 const generateToken = require('./generateToken');
 const { validateEmail, validatePassword } = require('./middlewares/loginMiddleware');
+const authToken = require('./middlewares/authToken');
+const {
+  talkerName,
+  talkerAge,
+  talkerTalk,
+  talkerWatchedAt,
+  talkerRate } = require('./middlewares/talkerMiddleware');
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,9 +35,26 @@ app.get('/talker/:id', async (req, res) => {
 });
 
 app.post('/login', validateEmail, validatePassword, generateToken, (req, res) => {
-  console.log(req.token);
   res.status(HTTP_OK_STATUS).json({ token: req.token });
 });
+
+app.post(
+  '/talker',
+  authToken,
+  talkerName,
+  talkerAge,
+  talkerTalk,
+  talkerWatchedAt,
+  talkerRate,
+  async (req, res) => {
+    const talkers = await readFile();
+    const newTalker = req.body;
+    newTalker.id = talkers.length + 1;
+    talkers.push(newTalker);
+    await writeFile(talkers);
+    res.status(201).json(newTalker);
+  },
+  );
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
