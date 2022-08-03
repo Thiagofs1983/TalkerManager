@@ -56,6 +56,27 @@ app.post(
   },
   );
 
+  app.put(
+    '/talker/:id',
+    authToken,
+    talkerName,
+    talkerAge,
+    talkerTalk,
+    talkerWatchedAt,
+    talkerRate,
+    async (req, res) => {
+      const talkers = await readFile();
+      const { id } = req.params;
+      const editTalker = req.body;
+      const findTalker = talkers.find((talker) => Number(talker.id) === Number(id));
+      const talkersFilter = talkers.filter((talker) => talker.id !== findTalker.id);
+      editTalker.id = Number(id);
+      talkersFilter.push(editTalker);
+      await writeFile(talkersFilter);
+      res.status(HTTP_OK_STATUS).json(editTalker);
+    },
+    );
+
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
