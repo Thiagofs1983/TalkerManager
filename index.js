@@ -19,6 +19,14 @@ const HTTP_OK_STATUS = 200;
 const HTTP_NOK_STATUS = 404;
 const PORT = '3000';
 
+app.get('/talker/search', authToken, async (req, res) => {
+  const talkers = await readFile();
+  const { q } = req.query;
+  const findTalker = talkers.filter((talker) => talker.name.includes(q));
+  if (!findTalker) return res.status(HTTP_OK_STATUS).json(talkers);
+  res.status(HTTP_OK_STATUS).json(findTalker);
+});
+
 app.get('/talker', async (req, res) => {
   const talkers = await readFile(); 
   return res.status(HTTP_OK_STATUS).json(talkers);
