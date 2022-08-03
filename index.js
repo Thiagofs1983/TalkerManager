@@ -56,26 +56,35 @@ app.post(
   },
   );
 
-  app.put(
-    '/talker/:id',
-    authToken,
-    talkerName,
-    talkerAge,
-    talkerTalk,
-    talkerWatchedAt,
-    talkerRate,
-    async (req, res) => {
-      const talkers = await readFile();
-      const { id } = req.params;
-      const editTalker = req.body;
-      const findTalker = talkers.find((talker) => Number(talker.id) === Number(id));
-      const talkersFilter = talkers.filter((talker) => talker.id !== findTalker.id);
-      editTalker.id = Number(id);
-      talkersFilter.push(editTalker);
-      await writeFile(talkersFilter);
-      res.status(HTTP_OK_STATUS).json(editTalker);
-    },
-    );
+app.put(
+  '/talker/:id',
+  authToken,
+  talkerName,
+  talkerAge,
+  talkerTalk,
+  talkerWatchedAt,
+  talkerRate,
+  async (req, res) => {
+    const talkers = await readFile();
+    const { id } = req.params;
+    const editTalker = req.body;
+    const findTalker = talkers.find((talker) => Number(talker.id) === Number(id));
+    const talkersFilter = talkers.filter((talker) => talker.id !== findTalker.id);
+    editTalker.id = Number(id);
+    talkersFilter.push(editTalker);
+    await writeFile(talkersFilter);
+    res.status(HTTP_OK_STATUS).json(editTalker);
+  },
+  );
+
+app.delete('/talker/:id', authToken, async (req, res) => {
+  const talkers = await readFile();
+  const { id } = req.params;
+  const findTalker = talkers.find((talker) => Number(talker.id) === Number(id));
+  const talkersFilter = talkers.filter((talker) => talker.id !== findTalker.id);
+  await writeFile(talkersFilter);
+  res.status(204).json('');
+});
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
