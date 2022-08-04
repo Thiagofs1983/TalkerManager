@@ -21,10 +21,19 @@ npm install
 
 ## Executando aplicação
 
-Para rodar a aplicação você vai precisar de ter o [Docker](https://docs.docker.com/engine/install/ubuntu/) instalado.
+Para rodar a aplicação você vai precisar ter o [Docker](https://docs.docker.com/engine/install/ubuntu/) instalado usando os comandos no terminal:
+```bash
+docker-compose up -d
+docker exec -it talker_manager bash
+npm install
+```
 
 * Para rodar o back-end:
 
-  ```
-  cd sd-020-a-project-talker-manager/ && npm start
-  ```
+```
+npm start
+```
+
+* Realizando Requisições:
+
+Para realizar as requisições, você pode usar a extensão [Thunder Client](https://www.thunderclient.com/) do VSCode ou pode usar os clientes HTTP [Postman](https://www.postman.com/) ou [Insomnia](https://insomnia.rest/).
