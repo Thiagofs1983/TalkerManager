@@ -1,16 +1,30 @@
-# 🚧 README em construção 🚧
+# Project Talker Manager
 
-<!-- Olá, Tryber!
+# Contexto
+Aplicação de cadastro de talkers (palestrantes) em que é possível cadastrar, visualizar, pesquisar, editar e excluir informações.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+Para isso, foi necessário desenvolver uma API de um CRUD (Create, Read, Update e Delete) de palestrantes (talkers) e desenvolver alguns endpoints que irão ler e escrever em um arquivo utilizando o módulo fs.
 
-É essencial que você preencha esse documento por conta própria, ok?
+## Técnologias usadas
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+Back-end:
+> Desenvolvido usando: NodeJS, ExpressJS, ES6
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
 
--->
+## Instalando Dependências
+
+> Backend
+```bash
+cd sd-020-a-project-talker-manager/ 
+npm install
+``` 
+
+## Executando aplicação
+
+Para rodar a aplicação você vai precisar de ter o [Docker](https://docs.docker.com/engine/install/ubuntu/) instalado.
+
+* Para rodar o back-end:
+
+  ```
+  cd sd-020-a-project-talker-manager/ && npm start
+  ```
